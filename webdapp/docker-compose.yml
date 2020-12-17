@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  colprofede-webdapp:
+    image: proycertificados/colprofede-webdapp
+    container_name: colprofede-webdapp-container
+    ports:
+      -  '80:80'   # HTTP web traffic
+      -  '443:443' # Secure protocol traffic - expose if needed/wanted
+    environment:
+      - IPFS_PORT='5001'
+      - IPFS_HOST='IPFS_HOST' # IMPORTANT - Change this IP
+      - IPFS_PROTOCOL='http'
+      - BESU_PORT='8545'
+      - BESU_HOST='BESU_HOST' # IMPORTANT - Change this IP
+      - BESU_PROTOCOL='http'
+      - CONTRACT_ADDRESS='CONTRACT_ADDRESS' # IMPORTANT - PUT YOUR OWN CONTRACT_ADDRESS
+  ipfs:
+    image: proycertificados/colprofede-ipfs 
+    container_name: ipfs
+    ports:
+      - '4001:4001' # IPFS swarm - expose if needed/wanted
+      - '5001:5001' # IPFS api - expose if needed/wanted
+      - '8080:8080' # IPFS gateway - expose if needed/wanted
